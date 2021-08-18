@@ -8,7 +8,7 @@ import os
 import asyncio
 from presets import Presets
 from pyrogram.types import Message
-from pyrogram import Client , filters
+from pyrogram import Client as adarsh, filters
 from pyrogram.errors import FloodWait
 from library.support import users_info
 from library.sql import add_user, query_msg
@@ -21,14 +21,14 @@ else:
     from config import Config
 
 
-@Client.on_message(filters.private & filters.command(['start', 'help']))
+@adarsh.on_message(filters.private & filters.command(['start', 'help']))
 async def start_bot(bot, m: Message):
     await add_user(m.from_user.id)
     await m.reply_text(Presets.WELCOME_MSG.format(m.from_user.first_name),
                        reply_markup=reply_markup_start)
 
 
-@Client.on_message(filters.private & filters.command('adarsh'))
+@adarsh.on_message(filters.private & filters.command('adarsh'))
 async def send_messages(bot, m: Message):
     if m.from_user.id not in Config.SUDO_USERS:
         return
@@ -58,7 +58,7 @@ async def send_messages(bot, m: Message):
                            )
 
 
-@Client.on_message(filters.private & filters.command('users'))
+@adarsh.on_message(filters.private & filters.command('users'))
 async def subscribers_count(bot, m: Message):
     id = m.from_user.id
     if id not in Config.SUDO_USERS:
