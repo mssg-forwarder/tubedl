@@ -1,3 +1,4 @@
+from pyrogram import emoji *
 class Presets(object):
     HELP_TEXT = """
 𝙄𝙣𝙡𝙞𝙣𝙚 𝙔𝙤𝙪𝙏𝙪𝙗𝙚 𝘽𝙤𝙩 𝙃𝙚𝙡𝙥:
@@ -39,8 +40,8 @@ Contact <a href='https://t.me/adarshgoelo5'>𝐔𝐩𝐝𝐚𝐭𝐞𝐬</a> | �
     #
     #
     NO_VOID_FORMAT_FOUND = "<code>{}</code>"
-    FINISHED_PROGRESS_STR = "◼️"
-    UN_FINISHED_PROGRESS_STR = "◻️"
+    FINISHED_PROGRESS_STR = "GREEN_SQUARE"
+    UN_FINISHED_PROGRESS_STR = "RED_SQUARE"
     CHECKING_LINK = "⏳ 𝐏𝐥𝐞𝐚𝐬𝐞 𝐖𝐚𝐢𝐭... ⏳"
     DOWNLOAD_START = "𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠... 𝐏𝐥𝐞𝐚𝐬𝐞 𝐖𝐚𝐢𝐭 !"
     UPLOAD_START = "𝐔𝐩𝐥𝐨𝐚𝐝𝐢𝐧𝐠 𝐭𝐨 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦..."
