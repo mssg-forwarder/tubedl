@@ -27,14 +27,14 @@ async def start_bot(bot, m: Message):
     await m.reply_text(Presets.WELCOME_MSG.format(m.from_user.first_name),
                        reply_markup=reply_markup_start)
     
-@adarsh.on_message(filters.private & filters.command('help']))
+@adarsh.on_message(filters.private & filters.command('help'))
 async def start_bot(bot, m: Message):
     await add_user(m.from_user.id)
     await m.reply_text(Presets.HELP_TEXT.format(m.from_user.first_name),
                        reply_markup=reply_markup_start)
 
 
-@adarsh.on_message(filters.private & filters.command('adarsh'))
+@adarsh.on_message(filters.private & filters.command('relay'))
 async def send_messages(bot, m: Message):
     if m.from_user.id not in Config.SUDO_USERS:
         return
