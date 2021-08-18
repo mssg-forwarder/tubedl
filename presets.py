@@ -1,4 +1,4 @@
-from pyrogram import emoji *
+from pyrogram.emoji import *
 class Presets(object):
     HELP_TEXT = """
 𝙄𝙣𝙡𝙞𝙣𝙚 𝙔𝙤𝙪𝙏𝙪𝙗𝙚 𝘽𝙤𝙩 𝙃𝙚𝙡𝙥:
