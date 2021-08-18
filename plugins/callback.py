@@ -6,7 +6,7 @@
 import asyncio
 import os
 from presets import Presets
-from pyrogram import Client, filters
+from pyrogram import Client as adarsh, filters
 from pyrogram.types import CallbackQuery
 from library.display_progress import cancel_process
 from plugins.youtube_dl_button import youtube_dl_call_back
@@ -19,7 +19,7 @@ else:
     from config import Config
 
 
-@Client.on_callback_query(filters.regex(r'^view_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^view_btn$'))
 async def view_thumbnail(bot, cb: CallbackQuery):
     if Config.AUTH_USERS and (cb.from_user.id not in Config.AUTH_USERS):
         await cb.answer(Presets.NOT_AUTH_TXT, True)
@@ -37,7 +37,7 @@ async def view_thumbnail(bot, cb: CallbackQuery):
         await cb.answer(Presets.NO_THUMB, True)
 
 
-@Client.on_callback_query(filters.regex(r'^thumb_del_conf_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^thumb_del_conf_btn$'))
 async def delete_thumb(bot, cb: CallbackQuery):
     thumb_image_path = os.getcwd() + "/" + "thumbnails" + "/" + str(cb.from_user.id) + ".jpg"
     try:
@@ -50,14 +50,14 @@ async def delete_thumb(bot, cb: CallbackQuery):
                                 reply_markup=reply_markup_start
                                 )
 
-@Client.on_callback_query(filters.regex(r'^a_back_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^a_back_btn$'))
 async def a_back_button(bot, cb: CallbackQuery):
     await cb.message.delete()
     await cb.message.reply_text(Presets.OPTIONS_TXT,
                                 reply_markup=reply_markup_start
                                 )
 
-@Client.on_callback_query(filters.regex(r'^del_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^del_btn$'))
 async def del_thumbnail(bot, cb: CallbackQuery):
     if Config.AUTH_USERS and (cb.from_user.id not in Config.AUTH_USERS):
         await cb.answer(Presets.NOT_AUTH_TXT, True)
@@ -73,7 +73,7 @@ async def del_thumbnail(bot, cb: CallbackQuery):
         await cb.answer(Presets.NO_THUMB, True)
 
 
-@Client.on_callback_query(filters.regex(r'^help_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^help_btn$'))
 async def help_bot(bot, cb: CallbackQuery):
     await cb.answer()
     await cb.message.edit_text(Presets.HELP_TEXT,
@@ -82,14 +82,14 @@ async def help_bot(bot, cb: CallbackQuery):
                                )
 
 
-@Client.on_callback_query(filters.regex(r'^back_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^back_btn$'))
 async def back_button(bot, cb: CallbackQuery):
     await cb.message.edit_text(Presets.OPTIONS_TXT,
                                reply_markup=reply_markup_start
                                )
 
 
-@Client.on_callback_query(filters.regex(r'^close_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^close_btn$'))
 async def clos_button(bot, cb: CallbackQuery):
     try:
         await cb.message.delete()
@@ -97,7 +97,7 @@ async def clos_button(bot, cb: CallbackQuery):
         pass
 
 
-@Client.on_callback_query(filters.regex(r'^home_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^home_btn$'))
 async def home_button(bot, cb: CallbackQuery):
     await cb.message.delete()
     await cb.message.reply_text(Presets.OPTIONS_TXT,
@@ -105,7 +105,7 @@ async def home_button(bot, cb: CallbackQuery):
                                 )
 
 
-@Client.on_callback_query(filters.regex(r'^cancel_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^cancel_btn$'))
 async def cancel_upload_process(bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     cancel_process.pop(id)
@@ -114,7 +114,7 @@ async def cancel_upload_process(bot, cb: CallbackQuery):
     await cb.message.delete()
 
 
-@Client.on_callback_query(filters.regex(r'^set_thumb_btn$'))
+@adarsh.on_callback_query(filters.regex(r'^set_thumb_btn$'))
 async def set_thumb(bot, cb: CallbackQuery):
     await cb.message.edit(Presets.DOWNLOAD_START)
     thumb_image = os.getcwd() + "/" + "thumbnails" + "/" + str(cb.from_user.id) + ".jpg"
@@ -123,7 +123,7 @@ async def set_thumb(bot, cb: CallbackQuery):
     await cb.message.edit_text(Presets.SAVED_THUMB, reply_markup=reply_markup_close)
 
 
-@Client.on_callback_query()
+@adarsh.on_callback_query()
 async def Youtube_dl_button(bot, cb: CallbackQuery):
     if "|" in cb.data:
         await youtube_dl_call_back(bot, cb)
