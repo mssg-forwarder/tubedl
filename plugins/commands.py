@@ -21,7 +21,7 @@ else:
     from config import Config
 
 
-@adarsh.on_message(filters.private & filters.command(['start , 'help']))
+@adarsh.on_message(filters.private & filters.command(['start' , 'help']))
 async def start_bot(bot, m: Message):
     await add_user(m.from_user.id)
     await m.reply_text(Presets.WELCOME_MSG.format(m.from_user.first_name),
